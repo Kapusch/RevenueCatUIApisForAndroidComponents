@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <_KapuschRevenueCatUINativeRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../native'))</_KapuschRevenueCatUINativeRoot>
+    <_KapuschRevenueCatUINativeRoot Condition="'$(UseKapuschRevenueCatUIAndroidInteropFromSource)' == 'true'">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../Native/Android/build'))</_KapuschRevenueCatUINativeRoot>
+  </PropertyGroup>
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <AndroidLibrary Include="$(_KapuschRevenueCatUINativeRoot)/aar/krcui-release.aar" Bind="false" />
+    <AndroidLibrary Include="$(_KapuschRevenueCatUINativeRoot)/deps/*" Bind="false" />
+  </ItemGroup>
+  <Target Name="ValidateRevenueCatUIAndroidConsumer" BeforeTargets="_ResolveLibraryProjectImports" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <Error Condition="!Exists('$(_KapuschRevenueCatUINativeRoot)/aar/krcui-release.aar')" Text="Missing RevenueCatUI native wrapper." />
+    <Error Condition="!Exists('$(_KapuschRevenueCatUINativeRoot)/deps/purchases-ui-10.16.1.aar')" Text="Missing pinned RevenueCatUI native SDK." />
+    <!-- purchases-ui declares minSdkVersion 24; fail with a clear message instead of a manifest merge error. -->
+    <Error Condition="'$(AndroidApplication)' == 'true' And '$(SupportedOSPlatformVersion)' != '' And $([MSBuild]::VersionLessThan('$(SupportedOSPlatformVersion)', '24.0'))" Text="Kapusch.RevenueCatUI.Android requires Android API 24 or later. Set SupportedOSPlatformVersion to 24.0 or higher (current: $(SupportedOSPlatformVersion))." />
+  </Target>
+</Project>

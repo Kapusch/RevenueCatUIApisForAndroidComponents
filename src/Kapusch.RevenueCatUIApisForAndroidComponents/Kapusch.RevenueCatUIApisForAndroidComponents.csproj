@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Kapusch.RevenueCatUI.Android</RootNamespace>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Native/**</DefaultItemExcludes>
+    <PackageId>Kapusch.RevenueCatUI.Android</PackageId>
+    <AssemblyName>Kapusch.RevenueCatUI.Android</AssemblyName>
+    <Authors>Kapusch</Authors>
+    <Version>1.0.0-rc.1</Version>
+    <Description>Thin .NET Android interop for RevenueCat Paywalls (purchases-ui), on top of the Kebechet.Maui.RevenueCat.Android core binding.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Kapusch/RevenueCatUIApisForAndroidComponents</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>nuget-readme.md</PackageReadmeFile>
+    <PackageTags>revenuecat;paywall;revenuecatui;maui;android</PackageTags>
+    <PackageReleaseNotes>RevenueCat purchases-ui 10.16.1. See https://github.com/Kapusch/RevenueCatUIApisForAndroidComponents/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <IncludeSymbols>false</IncludeSymbols>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AndroidLibrary Remove="Native/**" />
+    <AndroidAarLibrary Remove="Native/**" />
+    <AndroidJavaSource Remove="Native/**" />
+    <None Remove="Native/**" />
+    <Content Remove="Native/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- purchases-ui needs the core purchases AAR from the same release. -->
+    <PackageReference Include="Kebechet.Maui.RevenueCat.Android" Version="[10.16.1,10.16.2)" />
+    <!-- Managed bindings for purchases-ui's dependencies, taken from one dotnet/android-libraries
+         release so that they stay on a single AndroidX wave (Activity 1.12.4, Lifecycle 2.10,
+         Kotlin 2.3.10). Native/Android/revenuecatuiinterop uses the matching Compose BOM. -->
+    <PackageReference Include="Xamarin.AndroidX.Compose.UI" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.UI.Util" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.UI.Graphics" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.UI.Tooling.Preview" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.Foundation.Layout" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.Material" Version="1.10.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Compose.Material3" Version="1.4.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Activity.Compose" Version="1.12.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Compose" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.15.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.9.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Window" Version="1.5.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout.Core" Version="1.1.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.7.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.DocumentFile" Version="1.1.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.ExifInterface" Version="1.4.2.2" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.Utils" Version="1.0.0.36" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.LocalBroadcastManager" Version="1.1.0.24" />
+    <PackageReference Include="Xamarin.AndroidX.Print" Version="1.1.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable" Version="1.2.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable.Animated" Version="1.2.0.10" />
+    <PackageReference Include="Square.OkHttp3" Version="4.12.0.7" />
+    <PackageReference Include="Square.OkIO" Version="3.16.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="buildTransitive/**" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="nuget-readme.md" Pack="true" PackagePath="/" />
+    <None Include="../../THIRD_PARTY_NOTICES.md" Pack="true" PackagePath="/" />
+    <None Include="../../ThirdPartyLicenses/**" Pack="true" PackagePath="licenses/" />
+    <None Include="Native/Android/build/aar/*.aar" Pack="true" PackagePath="native/aar/" />
+    <None Include="Native/Android/build/deps/*" Pack="true" PackagePath="native/deps/" />
+  </ItemGroup>
+
+  <Target Name="ValidateNativeAssets" BeforeTargets="GenerateNuspec">
+    <Error Condition="!Exists('Native/Android/build/aar/krcui-release.aar')" Text="Build the native artifacts with Native/Android/build.sh before packing." />
+    <Error Condition="!Exists('Native/Android/build/deps/purchases-ui-10.16.1.aar')" Text="Missing pinned native dependencies." />
+  </Target>
+</Project>

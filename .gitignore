@@ -1,0 +1,16 @@
+# .NET
+bin/
+obj/
+*.user
+
+# NuGet
+*.nupkg
+artifacts/
+
+# macOS
+.DS_Store
+
+# Native build output, Gradle caches and local SDK path (repo-only)
+**/build/
+**/.gradle/
+**/local.properties

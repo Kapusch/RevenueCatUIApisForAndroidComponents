@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build_pack_android:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Scan public tree
+        env:
+          KAPUSCH_PRIVATE_TERMS: ${{ secrets.KAPUSCH_PRIVATE_TERMS }}
+        run: python3 scripts/verify-public.py
+
+      - name: Verify dependency lock
+        run: python3 scripts/verify-dependency-lock.py
+
+      - name: Install Android workload
+        run: dotnet workload install android --version 10.0.203
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('global.json', '**/*.csproj') }}
+
+      - name: Build native artifacts
+        run: bash src/Kapusch.RevenueCatUIApisForAndroidComponents/Native/Android/build.sh
+
+      - name: Pack
+        run: |
+          dotnet pack src/Kapusch.RevenueCatUIApisForAndroidComponents/Kapusch.RevenueCatUIApisForAndroidComponents.csproj \
+            -c Release \
+            -o artifacts/nuget
+
+      - name: Validate package and JNI contract
+        run: python3 scripts/verify-package.py
+
+      - name: Build sample (R8)
+        run: dotnet build samples/Smoke/Smoke.csproj -c Release
+
+      - name: Check runtime coverage
+        run: python3 scripts/verify-runtime-coverage.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget
+          path: artifacts/nuget/*.nupkg
