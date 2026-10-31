@@ -1,0 +1,2 @@
+-keep class com.kapusch.revenuecatui.androidinterop.PaywallInterop { public static *; }
+-keep class kotlin.Metadata { *; }

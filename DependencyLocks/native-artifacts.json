@@ -1,0 +1,15 @@
+{
+  "accompanist-drawablepainter-0.30.1.aar": "2c32d2743dbd29080d0879bb8cc359f0faa843f82143bc7b1fe52ed78cca71d0",
+  "adaptive-android-1.2.0.aar": "4b3edeb29928e6dcb6ef764fbb85c91e1150b72c393a1e39102ad76e5dfb2385",
+  "androidsvg-aar-1.4.aar": "02a5b08a2b35d2d58eb2eaca9d84ac00fb341da725fdbd653ea3ed130437e95a",
+  "coil-2.4.0.aar": "21094f2929e1fca108cf3d069f74328cc7fef65086c73269cfe90ff020cb15f3",
+  "coil-base-2.4.0.aar": "f7a58c0fa65ff5528ba03bb3a99a100430179bc6e1b62e3b89796512e4976341",
+  "coil-compose-2.4.0.aar": "0a0bd733a1617c572b66e6c2800d49ed0d744b24b8c6d02450a1c94e08c2976f",
+  "coil-compose-base-2.4.0.aar": "f6119e03ead78d804bad42182e1d0fdf8f9d2c647daf0aba33e89c64fcca2ce2",
+  "coil-svg-2.4.0.aar": "35957a9753786b7c552316b7ecaabdc3f6ee484276ac9edd7b455267d9356301",
+  "commonmark-0.21.0.jar": "81084a7035046fe306f0dbf16ef57a68d08ee5c97004ea867e62b5db46e98afb",
+  "commonmark-ext-gfm-strikethrough-0.21.0.jar": "b5ed6fa18214e588e502385d95e878a8150f122c7a874a75a389682837b906f8",
+  "constraintlayout-compose-android-1.1.0.aar": "c2457a45756b3aba45b2ed7502add90df6f58d126280509fd70108b0b347b6d1",
+  "purchases-ui-10.16.1.aar": "f61bcca677e89ec5abbcad23c7f6068f9d1c858b00c59be57026a9327501d35c",
+  "ui-text-google-fonts-1.10.4.aar": "22fb03f5f75538ad11683043b89b03af050bfce6b865fb56d7f06babb71c823c"
+}
