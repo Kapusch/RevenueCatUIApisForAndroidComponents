@@ -10,6 +10,6 @@
     <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Kapusch.RevenueCatUI.Android" Version="1.0.0-rc.1" />
+    <PackageReference Include="Kapusch.RevenueCatUI.Android" Version="1.0.0" />
   </ItemGroup>
 </Project>

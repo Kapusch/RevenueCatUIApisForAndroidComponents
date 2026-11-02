@@ -9,7 +9,7 @@
     <PackageId>Kapusch.RevenueCatUI.Android</PackageId>
     <AssemblyName>Kapusch.RevenueCatUI.Android</AssemblyName>
     <Authors>Kapusch</Authors>
-    <Version>1.0.0-rc.1</Version>
+    <Version>1.0.0</Version>
     <Description>Thin .NET Android interop for RevenueCat Paywalls (purchases-ui), on top of the Kebechet.Maui.RevenueCat.Android core binding.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Kapusch/RevenueCatUIApisForAndroidComponents</RepositoryUrl>
