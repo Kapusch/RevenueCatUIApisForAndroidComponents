@@ -3,7 +3,7 @@
 ## Install
 
 ```xml
-<PackageReference Include="Kapusch.RevenueCatUI.Android" Version="1.0.0-rc.1" />
+<PackageReference Include="Kapusch.RevenueCatUI.Android" Version="1.0.0" />
 ```
 
 The package brings `Kebechet.Maui.RevenueCat.Android` in the matching version range and the Compose

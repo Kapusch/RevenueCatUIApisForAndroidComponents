@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0-rc.1 (unreleased)
+## 1.0.0 (2026-11-02)
 
 - First release: purchases-ui 10.16.1 `PaywallView` with its listener, purchase/restore resume
   hooks, offering and close-button updates, custom variables and back handling.
